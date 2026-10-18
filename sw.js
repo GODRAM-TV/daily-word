@@ -1,5 +1,5 @@
 // GODRAM Daily Word service worker: works offline, refreshes the verse list when online.
-const CACHE = "daily-word-v1";
+const CACHE = "daily-word-v2";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "content.json",
   "icons/logo-128.png", "icons/icon-192.png", "icons/icon-512.png", "icons/favicon-32.png"];
 

@@ -145,7 +145,21 @@ select {
 #install { display: none; }
 #install.show { display: inline-block; }
 
-button:focus-visible, select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.yt {
+  display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+  border-top: 1px solid var(--line); padding-top: 14px;
+  color: var(--soft); text-decoration: none; font-size: 12.5px; font-weight: 500;
+}
+.yt svg { width: 26px; height: 19px; flex: none; }
+.yt b { color: var(--ink); font-weight: 700; }
+.yt i {
+  font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #fff; background: #cc0029; border-radius: 999px; padding: 4px 10px;
+}
+.yt:hover b { color: var(--gold); }
+.yt:hover i { background: #ff0033; }
+
+button:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
 .toast {
   position: absolute; left: 50%; bottom: 74px; transform: translate(-50%, 8px);
@@ -166,7 +180,7 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--gold); out
   .card { gap: 12px; }
 }
 @media (max-height: 400px) {
-  .tabs { display: none; }
+  .tabs, .yt { display: none; }
   .top img { width: 34px; }
   .stage { min-height: 120px; }
 }
@@ -223,6 +237,12 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--gold); out
       <button type="button" class="chip" id="install">Install</button>
     </div>
   </div>
+
+  <a class="yt" href="https://www.youtube.com/@GODRAMTV" target="_blank" rel="noopener">
+    <svg viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#ff0033"/><path d="M11 5.5v9l8-4.5z" fill="#fff"/></svg>
+    <span>Watch <b>GODRAM TV</b> on YouTube</span>
+    <i>Subscribe</i>
+  </a>
 
   <div class="toast" id="toast" role="status"></div>
 </main>

@@ -49,10 +49,18 @@ TEST IT ON YOUR PC WITHOUT HOSTING
   then visit  http://localhost:8000
 ```
 
-## Desktop widget for Windows (Rainmeter)
+## Desktop widget for Windows
 
-A desktop version lives in `desktop/GODRAM-Daily-Word.rmskin`. It sits on the wallpaper and reads the same `content.json`, refreshing every 6 hours.
+**Easiest:** download and run [GODRAM-Daily-Word-Setup.exe](https://github.com/GODRAM-TV/daily-word/raw/main/desktop/GODRAM-Daily-Word-Setup.exe). It sets everything up in one go and the widget appears on the desktop.
 
-1. Install Rainmeter (free) from rainmeter.net.
-2. Download `GODRAM-Daily-Word.rmskin` from this repository and double-click it, then click **Install**.
-3. Drag the widget where you want it. Right-click it to change speed, shuffle, or refresh the verse list.
+Windows may show "Windows protected your PC" because the installer is new and not code-signed. Click **More info**, then **Run anyway**.
+
+Already use Rainmeter? Download [GODRAM-Daily-Word.rmskin](https://github.com/GODRAM-TV/daily-word/raw/main/desktop/GODRAM-Daily-Word.rmskin) and double-click it instead.
+
+The widget sits on the wallpaper and reads the same `content.json`, refreshing every 6 hours. Right-click it to change speed, shuffle, refresh, or open GODRAM TV on YouTube.
+
+The setup includes [Rainmeter](https://github.com/rainmeter/rainmeter), free software under the GNU GPL v2.
+
+## GODRAM TV
+
+Watch and subscribe: https://www.youtube.com/@GODRAMTV
