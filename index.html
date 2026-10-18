@@ -157,6 +157,10 @@ select {
   color: #fff; background: #cc0029; border-radius: 999px; padding: 4px 10px;
 }
 .yt:hover b { color: var(--gold); }
+.win { text-align: center; font-size: 12px; color: var(--soft); text-decoration: none; margin-top: -6px; }
+.win b { color: var(--gold); font-weight: 600; }
+.win:hover b { text-decoration: underline; }
+@media (hover: none) { .win { display: none; } }
 .yt:hover i { background: #ff0033; }
 
 button:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
@@ -180,7 +184,7 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid
   .card { gap: 12px; }
 }
 @media (max-height: 400px) {
-  .tabs, .yt { display: none; }
+  .tabs, .yt, .win { display: none; }
   .top img { width: 34px; }
   .stage { min-height: 120px; }
 }
@@ -243,6 +247,7 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid
     <span>Watch <b>GODRAM TV</b> on YouTube</span>
     <i>Subscribe</i>
   </a>
+  <a class="win" href="https://github.com/GODRAM-TV/daily-word/raw/main/desktop/GODRAM-Daily-Word-Setup.exe">Using Windows? <b>Get the desktop widget</b></a>
 
   <div class="toast" id="toast" role="status"></div>
 </main>
