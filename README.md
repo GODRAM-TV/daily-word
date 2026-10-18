@@ -48,3 +48,11 @@ TEST IT ON YOUR PC WITHOUT HOSTING
   block that). Instead, in this folder run:   python -m http.server
   then visit  http://localhost:8000
 ```
+
+## Desktop widget for Windows (Rainmeter)
+
+A desktop version lives in `desktop/GODRAM-Daily-Word.rmskin`. It sits on the wallpaper and reads the same `content.json`, refreshing every 6 hours.
+
+1. Install Rainmeter (free) from rainmeter.net.
+2. Download `GODRAM-Daily-Word.rmskin` from this repository and double-click it, then click **Install**.
+3. Drag the widget where you want it. Right-click it to change speed, shuffle, or refresh the verse list.
