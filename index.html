@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1d3a">
+<meta name="description" content="Daily KJV scriptures and Christian quotes from GODRAM TV.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Daily Word">
+<title>GODRAM Daily Word</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: one centred broadcast-style card on a deep night-blue stage; brand colours from the GODRAM logo (gold ring, flame, globe blue). Single dark look by design. */
+:root {
+  --night: #06101f;
+  --navy: #0b1d3a;
+  --panel: rgba(14, 34, 66, 0.72);
+  --line: rgba(160, 196, 255, 0.16);
+  --ink: #f4f6fb;
+  --soft: #a9b8d3;
+  --gold: #f4b81c;
+  --gold-deep: #c98a06;
+  --flame: #e5431b;
+  --globe: #2f7fe0;
+  --font-ui: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-word: "Spectral", "Georgia", "Times New Roman", serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--night);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 50% 38%, rgba(47,127,224,0.22), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 85% 90%, rgba(229,67,27,0.10), transparent 70%),
+    linear-gradient(180deg, var(--navy), var(--night));
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 22px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--flame), var(--gold) 45%, var(--globe));
+}
+
+/* Header */
+.top { display: flex; align-items: center; gap: 12px; }
+.top img { width: 46px; height: auto; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); }
+.brand { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.brand b { font-weight: 800; font-size: 17px; letter-spacing: 0.02em; }
+.brand span { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.count { margin-left: auto; font-size: 12px; color: var(--soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Mode switch + filters */
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(0,0,0,0.28); border-radius: 999px; padding: 4px; gap: 4px; }
+.tabs button {
+  border: 0; background: transparent; color: var(--soft);
+  font: 600 13px var(--font-ui); padding: 9px 6px; border-radius: 999px; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.tabs button[aria-pressed="true"] { background: var(--gold); color: #1a1302; }
+.filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filters label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
+select {
+  font: 500 13px var(--font-ui); color: var(--ink); background: rgba(0,0,0,0.3);
+  border: 1px solid var(--line); border-radius: 10px; padding: 7px 10px; cursor: pointer; min-width: 0;
+}
+#topic { flex: 1 1 160px; }
+.chip {
+  font: 600 12px var(--font-ui); color: var(--soft); background: transparent;
+  border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { color: var(--gold); border-color: rgba(244,184,28,0.55); background: rgba(244,184,28,0.08); }
+
+/* The word */
+.stage { min-height: 230px; display: flex; flex-direction: column; justify-content: center; text-align: center; gap: 14px; padding: 6px 4px; touch-action: pan-y; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.eyebrow i { font-style: normal; color: var(--soft); font-weight: 600; }
+.word {
+  font-family: var(--font-word); font-weight: 400; margin: 0;
+  font-size: clamp(19px, 3.6vw, 27px); line-height: 1.5; text-wrap: balance;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.word.l  { font-size: clamp(18px, 3.1vw, 23px); }
+.word.m  { font-size: clamp(16px, 2.7vw, 20px); }
+.word.s  { font-size: clamp(15px, 2.4vw, 18px); line-height: 1.45; }
+.ref { font-size: 13px; font-weight: 600; color: var(--soft); letter-spacing: 0.03em; transition: opacity .35s ease; }
+.ref::before { content: ""; display: inline-block; width: 18px; height: 2px; background: var(--flame); vertical-align: middle; margin-right: 10px; border-radius: 2px; }
+.fading .word { opacity: 0; transform: translateY(6px); }
+.fading .ref { opacity: 0; }
+
+.bar { height: 3px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+.bar div { height: 100%; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); transform-origin: left; transform: scaleX(0); }
+
+/* Controls */
+.controls { display: flex; align-items: center; gap: 10px; }
+.round {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+  background: rgba(255,255,255,0.05); color: var(--ink); cursor: pointer;
+  display: grid; place-items: center; transition: background .2s, transform .15s; flex: none;
+}
+.round:hover { background: rgba(255,255,255,0.13); }
+.round:active { transform: scale(0.95); }
+.round svg { width: 18px; height: 18px; fill: currentColor; }
+.round.play { width: 52px; height: 52px; background: var(--gold); color: #1a1302; border: 0; box-shadow: 0 6px 20px rgba(244,184,28,0.3), 0 0 0 4px rgba(229,67,27,0.18); }
+.round.play:hover { background: #ffc93a; }
+.nav { display: flex; align-items: center; gap: 10px; }
+.extras { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.extras .round { width: 38px; height: 38px; }
+.extras .round svg { width: 16px; height: 16px; }
+#install { display: none; }
+#install.show { display: inline-block; }
+
+button:focus-visible, select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.toast {
+  position: absolute; left: 50%; bottom: 74px; transform: translate(-50%, 8px);
+  background: var(--ink); color: var(--night); font-size: 12px; font-weight: 700;
+  padding: 7px 14px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+.status { font-size: 12px; color: var(--soft); text-align: center; }
+
+/* Small windows: desktop mini-window or narrow phone */
+@media (max-width: 420px) {
+  .card { padding: 18px 16px 16px; gap: 14px; }
+  .extras .round.opt { display: none; }
+}
+@media (max-height: 520px) {
+  .filters, .extras .round.opt { display: none; }
+  .stage { min-height: 150px; }
+  .card { gap: 12px; }
+}
+@media (max-height: 400px) {
+  .tabs { display: none; }
+  .top img { width: 34px; }
+  .stage { min-height: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .word, .ref, .round, .toast { transition: none; }
+}
+</style>
+</head>
+<body>
+
+
+<main class="card" id="card">
+  <header class="top">
+    <img src="icons/logo-128.png" alt="GODRAM logo" width="46" height="43">
+    <div class="brand"><b>GODRAM TV</b><span>Daily Word</span></div>
+    <div class="count" id="count" aria-live="polite"></div>
+  </header>
+
+  <div class="tabs" role="group" aria-label="What to show">
+    <button type="button" data-mode="all" aria-pressed="true">All</button>
+    <button type="button" data-mode="verse" aria-pressed="false">Scriptures</button>
+    <button type="button" data-mode="quote" aria-pressed="false">Quotes</button>
+  </div>
+
+  <div class="filters">
+    <label for="topic">Topic</label>
+    <select id="topic"><option value="">All topics</option></select>
+    <button type="button" class="chip" id="shuffle" aria-pressed="true">Shuffle</button>
+  </div>
+
+  <section class="stage" id="stage" aria-live="polite">
+    <div class="eyebrow" id="eyebrow">Loading</div>
+    <blockquote class="word" id="word">Getting today's word ready…</blockquote>
+    <div class="ref" id="ref"></div>
+  </section>
+
+  <div class="bar" aria-hidden="true"><div id="progress"></div></div>
+
+  <div class="controls">
+    <div class="nav">
+      <button type="button" class="round" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg></button>
+      <button type="button" class="round play" id="play" aria-label="Pause"><svg viewBox="0 0 24 24" id="playIcon"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+      <button type="button" class="round" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M8.6 5.4 10 4l8 8-8 8-1.4-1.4 6.6-6.6z"/></svg></button>
+    </div>
+    <div class="extras">
+      <select id="speed" aria-label="Slide speed" class="opt-select">
+        <option value="5000">5 s</option>
+        <option value="8000" selected>8 s</option>
+        <option value="12000">12 s</option>
+        <option value="20000">20 s</option>
+        <option value="60000">1 min</option>
+      </select>
+      <button type="button" class="round opt" id="copy" aria-label="Copy this word"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11z"/></svg></button>
+      <button type="button" class="chip" id="install">Install</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+</main>
+
+<script>
+/* ===== Settings you may change =====
+   CONTENT_URL: where the verse list lives. Point it at your hosted content.json
+   (for example a GitHub raw link) and every installed copy updates itself. */
+const CONTENT_URL = "content.json";
+
+const $ = id => document.getElementById(id);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("gdw:" + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("gdw:" + k, JSON.stringify(v)); } catch {} }
+};
+
+let all = [];
+let list = [];
+let pos = 0;
+let mode = store.get("mode", "all");
+let topic = store.get("topic", "");
+let shuffle = store.get("shuffle", true);
+let delay = store.get("delay", 8000);
+let playing = store.get("playing", true);
+let anim = null;
+
+const PAUSE = '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
+const PLAY = '<path d="M8 5v14l11-7z"/>';
+
+async function loadContent() {
+  try {
+    const r = await fetch(CONTENT_URL, { cache: "no-cache" });
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    store.set("cache", data);
+    return data;
+  } catch (e) {
+    const cached = store.get("cache", null);
+    if (cached) return cached;
+    throw e;
+  }
+}
+
+function shuffled(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function buildTopics() {
+  const pool = mode === "all" ? all : all.filter(x => x.type === mode);
+  const topics = [...new Set(pool.map(x => x.topic))].sort();
+  if (topic && !topics.includes(topic)) topic = "";
+  $("topic").innerHTML = '<option value="">All topics</option>' +
+    topics.map(t => `<option value="${t}">${t}</option>`).join("");
+  $("topic").value = topic;
+}
+
+function rebuild() {
+  let pool = mode === "all" ? all : all.filter(x => x.type === mode);
+  if (topic) pool = pool.filter(x => x.topic === topic);
+  list = shuffle ? shuffled(pool) : pool;
+  pos = 0;
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+  $("shuffle").setAttribute("aria-pressed", String(shuffle));
+  show(true);
+}
+
+function sizeClass(n) { return n < 90 ? "" : n < 160 ? "l" : n < 260 ? "m" : "s"; }
+
+function show(animate) {
+  const item = list[pos];
+  if (!item) { $("word").textContent = "Nothing matches this filter yet."; $("ref").textContent = ""; $("eyebrow").textContent = ""; return; }
+  const paint = () => {
+    $("eyebrow").innerHTML = (item.type === "verse" ? "Scripture" : "Quote") + ` <i>· ${item.topic}</i>`;
+    $("word").textContent = item.type === "verse" ? item.text : `“${item.text}”`;
+    $("word").className = "word " + sizeClass(item.text.length);
+    $("ref").textContent = item.ref;
+    $("count").textContent = `${pos + 1} / ${list.length}`;
+    $("stage").classList.remove("fading");
+  };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (animate && !reduce) { $("stage").classList.add("fading"); setTimeout(paint, 300); } else paint();
+  startTimer();
+}
+
+function startTimer() {
+  if (anim) anim.cancel();
+  anim = $("progress").animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: delay, fill: "forwards" });
+  anim.onfinish = () => go(1);
+  if (!playing) anim.pause();
+}
+
+function go(step) {
+  if (!list.length) return;
+  pos = (pos + step + list.length) % list.length;
+  show(true);
+}
+
+function setPlaying(p) {
+  playing = p;
+  store.set("playing", p);
+  $("playIcon").innerHTML = p ? PAUSE : PLAY;
+  $("play").setAttribute("aria-label", p ? "Pause" : "Play");
+  if (anim) p ? anim.play() : anim.pause();
+}
+
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg; t.classList.add("on");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("on"), 1600);
+}
+
+/* Events */
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  mode = b.dataset.mode; store.set("mode", mode); buildTopics(); rebuild();
+}));
+$("topic").addEventListener("change", e => { topic = e.target.value; store.set("topic", topic); rebuild(); });
+$("shuffle").addEventListener("click", () => { shuffle = !shuffle; store.set("shuffle", shuffle); rebuild(); });
+$("speed").addEventListener("change", e => { delay = +e.target.value; store.set("delay", delay); startTimer(); });
+$("prev").addEventListener("click", () => go(-1));
+$("next").addEventListener("click", () => go(1));
+$("play").addEventListener("click", () => setPlaying(!playing));
+$("copy").addEventListener("click", () => {
+  const item = list[pos]; if (!item) return;
+  const text = `${item.type === "verse" ? item.text : "“" + item.text + "”"} — ${item.ref}`;
+  navigator.clipboard.writeText(text).then(() => toast("Copied"), () => {
+    const r = document.createRange(); r.selectNodeContents($("stage"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Selected. Press Ctrl+C to copy");
+  });
+});
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT") return;
+  if (e.key === "ArrowRight") go(1);
+  else if (e.key === "ArrowLeft") go(-1);
+  else if (e.key === " " && e.target.tagName !== "BUTTON") { e.preventDefault(); setPlaying(!playing); }
+});
+let tx = 0;
+$("stage").addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+$("stage").addEventListener("touchend", e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (dx > 50) go(-1); else if (dx < -50) go(1);
+}, { passive: true });
+document.addEventListener("visibilitychange", () => {
+  if (!anim) return;
+  if (document.hidden) anim.pause(); else if (playing) anim.play();
+});
+
+/* Install as an app (works when hosted as a PWA) */
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; $("install").classList.add("show"); });
+$("install").addEventListener("click", async () => {
+  if (!installEvt) return;
+  installEvt.prompt(); await installEvt.userChoice; installEvt = null; $("install").classList.remove("show");
+});
+if ("serviceWorker" in navigator && document.querySelector('link[rel="manifest"]')) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+
+/* Start */
+$("speed").value = String(delay);
+setPlaying(playing);
+loadContent().then(data => {
+  all = data.items || [];
+  buildTopics();
+  rebuild();
+}).catch(() => {
+  $("eyebrow").textContent = "Offline";
+  $("word").textContent = "Couldn't load the verse list. Connect to the internet once, and it will keep working offline after that.";
+});
+</script>
+
+</body>
+</html>

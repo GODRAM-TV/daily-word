@@ -1,0 +1,29 @@
+{
+  "name": "GODRAM Daily Word",
+  "short_name": "Daily Word",
+  "description": "KJV scriptures and Christian quotes for every area of life, from GODRAM TV.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#06101f",
+  "theme_color": "#0b1d3a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
